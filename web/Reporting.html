@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporting </title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function (){
+            $('#sure').click(function (){
+                $.ajax({
+                    type : 'post',
+                    url : '/WebAjax_war_exploded/Reporting',
+                    data : {
+                        identify : $('numb').val(),
+                        name : $('name').val(),
+                    },
+                    dataType : 'json',
+                    success : function (result){
+                        alert(result)
+                    },
+                    error : function (e){
+                        alert(e)
+                    }
+                });
+            });
+            $('#resure').click(function (){
+                $(':text').val("");
+                alert("重置成功");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        学号/工号<input type="text" id="numb" name="identify" >
+        姓名<input type="text" id="name" name="name">
+        学院<input type="text" id="college" name="college">
+        性别<input type="text" id="sex" name="sex">
+        所在省份<input type="text" id="province" name="province">
+        所在城市<input type="text" id="city" name="city">
+        当日体温<input type="text" id="temp" name="temp">
+        是否返校<input type="text" id="is_back" name="is_back">
+        是否疑似<input type="text" id="susp" name="susp">
+        是否确诊<input type="text" id="diag" name="diag">
+        <br>
+        <button id="sure" name="sure">确认</button>
+        <button id="resure" name="resure">重置</button>
+    </div>
+</body>
+</html>

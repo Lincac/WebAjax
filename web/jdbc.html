@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head  lang="en">
+    <meta charset="UTF-8">
+    <title>jj</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function (){
+            $('.s3').click(function (){
+                $.ajax({
+                    type : 'post',
+                    url : '/WebAjax_war_exploded/JDBC',
+                    data : {
+                        username : $('.s1').val(),
+                        userpassword : $('.s2').val(),
+                        age: 1
+                    },
+                    dataType : 'json',
+                    success : function (result){
+                        alert("上传成功！");
+                        //result = JSON.parse(result);
+                        $('.show').empty();
+                        $('.show').append(
+                            '<tr><th>用户名</th><th>密码</th><th>年龄</th></tr>'
+                        );
+                        for (var i =0;i<result.length;i++){
+                            $(".show").append( "<tr><td>"+result[i].name+"</td><td>"+result[i].pass+"</td><td>"+result[i].age+"</td></tr>");
+                        }
+                    },
+                    error : function (e){
+                        alert("no");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        用户名<input name="username" class="s1" type="text">
+        密码<input name="userpassword" class="s2" type="text">
+        <input type="submit" name="提交" class="s3">
+    </div>
+    <div>
+        <table class="show">
+        </table>
+    </div>
+</body>
+</html>

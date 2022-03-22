@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Epidemic Situation</title>
+    <script src="./js/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            let str = "";
+            $('#sub').click(function(){
+                $(":radio").each(function (){
+                if ($(this).is(":checked")){
+                    str = $(this).val();
+                }
+            });
+                $.ajax({
+                    type : "post",
+                    url : "/WebAjax_war_exploded/epidemic",
+                    data : {
+                        username : $('.userna').val(),
+                        password : $('.userpa').val(),
+                        userfrom : str.toString()
+                    },
+                    dataType : "json",/*前后端交互的类型*/
+                    success : function (result){
+                        alert(result);
+                        setTimeout(function (){
+                            window.location.href = "http://localhost:8080/WebAjax_war_exploded/Reporting.html"
+                        },1000);
+                    },
+                    error : function (e){
+                        alert(e.toString());
+                    }
+                });
+            });
+            $('#resub').click(function(){
+                alert("aasdasdsd");
+                $(':text').val("");
+                $(':radio').prop("checked",false);
+            });
+        });
+    </script>
+</head>
+<body>
+<div align="center">
+    <p>师生疫情每日上报系统</p>
+    用户:<input class="userna" name="username" type="text">
+    <br>
+    密码:<input class="userpa" name="password" type="text">
+    <br>
+    <input type="radio" id="st" name="from" value="学生/教师" checked>学生/教师
+    <input type="radio" id="co" name="from" value="学院">学院
+    <input type="radio" id="ep" name="from" value="防空办">防空办
+    <br>
+    <input type="button" id="sub" name="in" value="登录">
+    <input type="button" id="resub" name="rein" value="重置">
+</div>
+</body>
+</html>

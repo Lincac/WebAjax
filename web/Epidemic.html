@@ -6,6 +6,12 @@
     <script src="./js/jquery-3.3.1.js"></script>
     <script>
         $(document).ready(function(){
+            var  da = new Date();
+            var hou = da.getHours();
+            var min = da.getMinutes();
+            if (hou === 9 && min === 55){
+                alert("打卡时间还有五分钟截至")
+            }
             let str = "";
             $('#sub').click(function(){
                 $(":radio").each(function (){

@@ -6,9 +6,17 @@
     <script src="js/jquery-3.3.1.js"></script>
     <script>
         $(document).ready(function (){
+            var  da = new Date();
+            var hou = da.getHours();
+            var min = da.getMinutes();
+            if (hou === 9 && min === 55){
+                alert("打卡时间还有五分钟截至")
+            }
             $('#sure').click(function (){
                 alert("提交成功！")
-
+                setTimeout(function (){
+                    window.location.href = "http://localhost:8080/WebAjax_war_exploded/Query.html"
+                },1000);
             });
             $('#resure').click(function (){
                 $(':text').val("");

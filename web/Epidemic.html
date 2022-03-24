@@ -40,26 +40,99 @@
                 });
             });
             $('#resub').click(function(){
-                alert("aasdasdsd");
+                alert("出错了");
                 $(':text').val("");
                 $(':radio').prop("checked",false);
             });
         });
     </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: lightgray;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        #name_trip {
+            margin-left: 50px;
+            color: red;
+        }
+
+        p {
+            margin-top: 30px;
+            margin-left: 20px;
+            color: black;
+        }
+
+        .userna {
+            margin-left: 15px;
+            border-radius: 5px;
+            border-style: hidden;
+            height: 30px;
+            width: 300px;
+            outline: none;
+            color: #3c3e41;
+            padding-left: 10px;
+        }
+        .userpa {
+            margin-left: 15px;
+            border-radius: 5px;
+            border-style: hidden;
+            height: 30px;
+            width: 300px;
+            outline: none;
+            color: #3c3e41;
+            padding-left: 10px;
+        }
+
+        .a {
+            font-family: "KaiTi";
+        }
+
+        .button {
+            border-color: cornsilk;
+            color: aliceblue;
+            background-color: lightskyblue;
+            border-style: hidden;
+            border-radius: 5px;
+            width: 100px;
+            height: 31px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-<div align="center">
-    <p>师生疫情每日上报系统</p>
-    用户:<input class="userna" name="username" type="text">
-    <br>
-    密码:<input class="userpa" name="password" type="text">
-    <br>
+    <form>
+    <h1 style="text-align: center;color: black;" class="a">师生疫情每日上报系统</h1>
+    <p>用户:<input name="username" type="text" class="userna"><label id="name_trip"></label></p>
+
+    <p>密码:<input name="password" type="password" class="userpa"><label id="password_trip"></label></p>
+
+    <div style="text-align: center">
     <input type="radio" id="st" name="from" value="学生/教师" checked>学生/教师
     <input type="radio" id="co" name="from" value="学院">学院
     <input type="radio" id="ep" name="from" value="防空办">防空办
     <br>
-    <input type="button" id="sub" name="in" value="登录">
-    <input type="button" id="resub" name="rein" value="重置">
-</div>
+    <input type="button" id="sub" name="in"  class="button" value="登录" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='lightskyblue'">
+    <input type="button" id="resub" name="rein"  class="button" value="重置" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='lightskyblue'">
+</div></form>
 </body>
 </html>

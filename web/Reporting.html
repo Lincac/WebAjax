@@ -25,23 +25,78 @@
             });
         });
     </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: lightgray;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .button {
+            border-color: cornsilk;
+            color: aliceblue;
+            background-color: lightskyblue;
+            border-style: hidden;
+            border-radius: 5px;
+            width: 100px;
+            height: 31px;
+            font-size: 16px;
+        }
+        div.cla{
+            float: left;
+            width: 40%;
+        }
+        div.clb{
+            float: right;
+            width: 40%;
+        }
+        div.clc{
+            float: bottom;
+            width: 40%;
+        }
+        div#cc button{
+            margin-right: 10px;
+        }
+    </style>
 </head>
-<body>
-    <div>
+<body >
+    <div class="cla">
         <form id="myform" action="/WebAjax_war_exploded/Reporting" method="post">
-            学号/工号<input type="text" id="numb" name="identify" >
-            姓名<input type="text" id="name" name="name">
-            学院<input type="text" id="college" name="college">
-            性别<input type="text" id="sex" name="sex">
-            所在省份<input type="text" id="province" name="province">
-            所在城市<input type="text" id="city" name="city">
-            当日体温<input type="text" id="temp" name="temp">
-            是否返校<input type="text" id="is_back" name="is_back">
-            是否疑似<input type="text" id="susp" name="susp">
-            是否确诊<input type="text" id="diag" name="diag">
+            学号/工号<input type="text" id="numb" name="identify" ><br>
+            学院    <input type="text" id="college" name="college"><br>
+            所在省份<input type="text" id="province" name="province"><br>
+            当日体温<input type="text" id="temp" name="temp"><br>
+            是否疑似<input type="text" id="susp" name="susp"><br>
             <br>
-            <input type="button" id="sure" name="sure" value="提交">
-            <input type="button" id="resure" name="resure" value="重置">
+            <input type="button" id="sure" name="sure" value="提交" class="button" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='lightskyblue'">
+        </form>
+    </div>
+    <div class="clb">
+        <form id="mform" action="/WebAjax_war_exploded/Reporting" method="post">
+            姓名<input type="text" id="name" name="name"><br>
+            性别<input type="text" id="sex" name="sex"><br>
+            所在城市<input type="text" id="city" name="city"><br>
+            是否返校<input type="text" id="is_back" name="is_back"><br>
+            是否确诊<input type="text" id="diag" name="diag"><br>
+            <br>
+            <input type="button" id="resure" name="resure" value="重置"  class="button" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='lightskyblue'">
+
         </form>
     </div>
 </body>

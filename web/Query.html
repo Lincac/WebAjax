@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Query</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function (){
+            $('#query').click(function (){
+                $.ajax({
+                    type : 'post',
+                    url : 'a',
+                    data : {
+                        identify: $('#identify').val(),
+                        name: $('#name').val(),
+                        sex: $('#sex').val(),
+                        province: $('#province').val(),
+                        city: $('#city').val(),
+                        susp: $('#susp').val(),
+                        diag: $('#diag').val(),
+                        date: $('#date').val(),
+                    },
+                    dataType : 'json',
+                    success : function (result){
 
+                    },
+                    error :function (e){
+
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-
+    <div>
+        学/工号<input id="identify" name="identify" type="text">
+        姓名<input id="name" name="name" type="text">
+        性别<input id="sex" name="sex" type="text">
+        省份<input id="province" name="province" type="text">
+        <button id="query">查询</button>
+        <br>
+        城市<input id="city" name="city" type="text">
+        返校情况<input id="susp" name="susp" type="text">
+        确诊情况<input id="diag" name="diag" type="text">
+        日期<input id="date" name="date" type="text">
+        <button id="picture">图表显示</button>
+    </div>
 </body>
 </html>

@@ -9,7 +9,7 @@
             $('#query').click(function (){
                 $.ajax({
                     type : 'post',
-                    url : 'a',
+                    url : '/WebAjax_war_exploded/Query',
                     data : {
                         identify: $('#identify').val(),
                         name: $('#name').val(),
@@ -22,10 +22,10 @@
                     },
                     dataType : 'json',
                     success : function (result){
-
+                        alert(result)
                     },
                     error :function (e){
-
+                        alert("查询空错误！")
                     }
                 });
             });

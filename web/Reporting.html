@@ -108,7 +108,7 @@
 </head>
 <body >
     <div class="cla">
-        <form id="myform">
+        <form id="myform" action="/WebAjax_war_exploded/Reporting" method="post" style="text-align: right;margin-right:30px" >
             学号/工号<input type="text" id="identify" name="identify" ><br>
             学院    <input type="text" id="college" name="college"><br>
             所在省份<input type="text" id="province" name="province"><br>
@@ -119,14 +119,15 @@
         </form>
     </div>
     <div class="clb">
-        <form id="mform">
-            姓名<input type="text" id="name" name="name"><br>
-            性别<input type="text" id="sex" name="sex"><br>
+        <form id="mform" action="/WebAjax_war_exploded/Reporting" method="post" style="text-align: -moz-left;margin-right: 50%">
+            姓　　名<input type="text" id="name" name="name"><br>
+            性　　别<input type="text" id="sex" name="sex"><br>
             所在城市<input type="text" id="city" name="city"><br>
             是否返校<input type="text" id="is_back" name="is_back"><br>
             是否确诊<input type="text" id="diag" name="diag"><br>
             <br>
             <input type="button" id="resure" name="resure" value="重置"  class="button" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='lightskyblue'">
+
         </form>
     </div>
 </body>

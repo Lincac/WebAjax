@@ -46,8 +46,8 @@ public class JDBC extends HttpServlet {
                 while(rs.next()){
                     UserInfo pp = new UserInfo();
                     pp.setName(rs.getString(1)); // 获得列索引
-                    pp.setPass(rs.getString(2));
-                    pp.setAge(rs.getInt(3));
+//                    pp.setPass(rs.getString(2));
+//                    pp.setAge(rs.getInt(3));
                     userInfos.add(pp);
                 }
             }

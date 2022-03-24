@@ -23,5 +23,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 10.0.17" level="application_server_libraries" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="jquery.form" level="application" />
   </component>
 </module>

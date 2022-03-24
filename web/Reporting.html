@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Reporting </title>
     <script src="js/jquery-3.3.1.js"></script>
+    <script src="https://malsup.github.io/jquery.form.js"></script>
     <script>
         $(document).ready(function (){
             var  da = new Date();
@@ -13,11 +14,42 @@
                 alert("打卡时间还有五分钟截至")
             }
             $('#sure').click(function (){
-                alert("提交成功！")
-                $('#myform').submit();
-                setTimeout(function (){
-                    window.location.href = "http://localhost:8080/WebAjax_war_exploded/Query.html"
-                },3000);
+                var is_ok = true;
+                $(':text').each(function (i,e){
+                    if($(e).val() === ''){
+                        is_ok = false;
+                    }
+                });
+                if (is_ok){
+                    $.ajax({
+                        type : 'post',
+                        url : '/WebAjax_war_exploded/Reporting',
+                        data : {
+                            identify : $('#identify').val(),
+                            name : $('#name').val(),
+                            college : $('#college').val(),
+                            sex : $('#sex').val(),
+                            province : $('#province').val(),
+                            city : $('#city').val(),
+                            temp : $('#temp').val(),
+                            is_back : $('#is_back').val(),
+                            susp : $('#susp').val(),
+                            diag : $('#diag').val(),
+                        },
+                        dataType : 'json',
+                        success : function (result){
+                            alert(result)
+                            setTimeout(function (){
+                                window.location.href = "http://localhost:8080/WebAjax_war_exploded/Query.html";
+                            },3000);
+                        },
+                        error :function (e){
+                            alert(e)
+                        }
+                    });
+                }else {
+                    alert("有空未填！")
+                }
             });
             $('#resure').click(function (){
                 $(':text').val("");
@@ -77,8 +109,8 @@
 </head>
 <body >
     <div class="cla">
-        <form id="myform" action="/WebAjax_war_exploded/Reporting" method="post">
-            学号/工号<input type="text" id="numb" name="identify" ><br>
+        <form id="myform">
+            学号/工号<input type="text" id="identify" name="identify" ><br>
             学院    <input type="text" id="college" name="college"><br>
             所在省份<input type="text" id="province" name="province"><br>
             当日体温<input type="text" id="temp" name="temp"><br>
@@ -88,7 +120,7 @@
         </form>
     </div>
     <div class="clb">
-        <form id="mform" action="/WebAjax_war_exploded/Reporting" method="post">
+        <form id="mform">
             姓名<input type="text" id="name" name="name"><br>
             性别<input type="text" id="sex" name="sex"><br>
             所在城市<input type="text" id="city" name="city"><br>
@@ -96,7 +128,6 @@
             是否确诊<input type="text" id="diag" name="diag"><br>
             <br>
             <input type="button" id="resure" name="resure" value="重置"  class="button" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='lightskyblue'">
-
         </form>
     </div>
 </body>

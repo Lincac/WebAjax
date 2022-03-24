@@ -1,9 +1,12 @@
 package com.servlet;
 
+import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import javafx.util.converter.ShortStringConverter;
+
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.xml.crypto.Data;
@@ -19,6 +22,7 @@ public class Reporting extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean is_ok = false;
         String identify = request.getParameter("identify");
         String name = request.getParameter("name");
         String college = request.getParameter("college");
@@ -29,9 +33,7 @@ public class Reporting extends HttpServlet {
         String is_back = request.getParameter("is_back");
         String susp = request.getParameter("susp");
         String diag = request.getParameter("diag");
-
         Connection cnn;
-        ResultSet re;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             cnn = DriverManager.getConnection("jdbc:mysql://localhost:3306/epidemic?serverTimezone=GMT%2B8",
@@ -53,10 +55,22 @@ public class Reporting extends HttpServlet {
             stmt.setDate(11, new java.sql.Date(date.getTime()));
             int item = stmt.executeUpdate();
             if (item == 1){
+                is_ok = true;
                 System.out.println("上传成功！");
+                PrintWriter oo = response.getWriter();
+                response.setCharacterEncoding("utf-8");
+                oo.print(new Gson().toJson("上传成功！"));
+                oo.flush();
+                oo.close();
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+        }
+        if (!is_ok){
+            PrintWriter oo = response.getWriter();
+            oo.print("no");
+            oo.flush();
+            oo.close();
         }
     }
 }

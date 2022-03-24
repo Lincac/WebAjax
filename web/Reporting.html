@@ -14,9 +14,10 @@
             }
             $('#sure').click(function (){
                 alert("提交成功！")
+                $('#myform').submit();
                 setTimeout(function (){
                     window.location.href = "http://localhost:8080/WebAjax_war_exploded/Query.html"
-                },1000);
+                },3000);
             });
             $('#resure').click(function (){
                 $(':text').val("");
@@ -39,8 +40,8 @@
             是否疑似<input type="text" id="susp" name="susp">
             是否确诊<input type="text" id="diag" name="diag">
             <br>
-            <input type="submit" id="sure" name="sure">
-            <input type="reset" id="resure" name="resure">
+            <input type="button" id="sure" name="sure" value="提交">
+            <input type="button" id="resure" name="resure" value="重置">
         </form>
     </div>
 </body>

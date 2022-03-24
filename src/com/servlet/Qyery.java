@@ -6,8 +6,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-import javax.sound.sampled.Line;
-import java.awt.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -18,6 +16,7 @@ import static java.sql.DriverManager.getConnection;
 
 @WebServlet(name = "Query", value = "/Query")
 public class Qyery extends HttpServlet {
+    private int count=0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,8 +24,8 @@ public class Qyery extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean is_ok = false;
-        int count=0;
+        Connection cnn;
+        ResultSet rs;
         Map<String, String> map = null;
         UserInfo userInfo = new UserInfo();
         String identify = request.getParameter("identify");
@@ -45,17 +44,13 @@ public class Qyery extends HttpServlet {
         map.put("diag",diag);
         String date = request.getParameter("date");
         map.put("date",date);
-        Iterator it = map.keySet().iterator();
-        while(it.hasNext()){
-            Object key = it.next();
-            Object val = map.get(key);
-            if (val.equals("")){
-                count++;
+        for (String key : map.keySet()) {
+            String val = map.get(key);
+            if (val.equals("")) {
+                count+=1;
             }
         }
         System.out.println(identify+name+sex+province+city+susp+diag+date);
-        Connection cnn;
-        ResultSet rs;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             cnn = getConnection("jdbc:mysql://localhost:3306/epidemic?serverTimezone=GMT%2B8",
@@ -64,6 +59,25 @@ public class Qyery extends HttpServlet {
             String sql = "SELECT * FROM info WHERE (?,?)";
             PreparedStatement stmt = cnn.prepareStatement(sql);
             rs = stmt.executeQuery();
+            if (count == 0){
+
+            }else if (count == 1){
+
+            }else if (count == 2){
+
+            }else if (count == 3){
+
+            }else if (count == 4){
+
+            }else if (count == 5){
+
+            }else if (count == 6){
+
+            }else if (count == 7){
+
+            }else{
+
+            }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

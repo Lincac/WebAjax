@@ -24,6 +24,10 @@
                     dataType : 'json',
                     success : function (result){
                         alert("查询成功")
+                        for(var i=0;i<result.length;i++)
+                        {
+                            $("#showDiv").append("<tr style='text-align: center'><td>"+result[i].identify+"</td><td>"+result[i].name+"</td><td>"+result[i].sex+"</td><td>"+result[i].college+"</td><td>"+result[i].province+"</td><td>"+result[i].city+"</td><td>"+result[i].temp+"</td><td>"+result[i].is_back+"</td><td>"+result[i].susp+"</td><td>"+result[i].diag+"</td><td>"+result[i].date+"</td></tr>");
+                        }
                     },
                     error :function (e){
                         alert("查询空错误！")
@@ -67,7 +71,7 @@
             日期　　<input id="date" name="date" type="text">　　　　
             <button id="derived">导出</button></td></tr></table>
     <br>
-    <table border="1 "cellpadding="0" cellspacing="0" style="border-collapse:collapse;" width="100%">
+    <table border="1 "cellpadding="0" cellspacing="0" style="border-collapse:collapse;" width="100%" id="showDiv">
         <tr>
             <th align="center">学号/工号</th>
             <th align="center">姓名</th>

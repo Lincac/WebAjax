@@ -29,11 +29,16 @@
                     },
                     dataType : "json",/*前后端交互的类型*/
                     success : function (result){
-                        alert(result);
-                        setTimeout(function (){
-                            window.location.href = "http://localhost:8080/WebAjax_war_exploded/Reporting.html"
-                        },1000);
-                    },
+                     alert(result);
+                       if ($("input[type = 'radio']:checked").val() == "学院") {
+                           window.location.href = "pacQuery.html"
+                       } else if ($("input[type = 'radio']:checked").val() == "防控办") {
+                           window.location.href = "Query.html"
+                       } else if ($("input[type = 'radio']:checked").val() == "学生/教师") {
+                           window.location.href = "Reporting.html"
+                       }
+
+                },
                     error : function (e){
                         alert("登录失败！");
                     }
@@ -129,7 +134,7 @@
     <div style="text-align: center">
     <input type="radio" id="st" name="from" value="学生/教师" checked>学生/教师
     <input type="radio" id="co" name="from" value="学院">学院
-    <input type="radio" id="ep" name="from" value="防空办">防空办
+    <input type="radio" id="ep" name="from" value="防控办">防控办
     <br>
     <input type="button" id="sub" name="in"  class="button" value="登录" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='lightskyblue'">
     <input type="button" id="resub" name="rein"  class="button" value="重置" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='lightskyblue'">

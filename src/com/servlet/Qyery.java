@@ -9,14 +9,12 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import static java.sql.DriverManager.getConnection;
 
 @WebServlet(name = "Query", value = "/Query")
 public class Qyery extends HttpServlet {
-    private int count=0;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,9 +23,10 @@ public class Qyery extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection cnn;
+        int count=0;
         ResultSet rs;
-        Map<String, String> map = null;
-        UserInfo userInfo = new UserInfo();
+        Map<String, String> map = new HashMap<>();
+        List<UserInfo> userInfos = new ArrayList<UserInfo>();
         String identify = request.getParameter("identify");
         map.put("identify",identify);
         String name = request.getParameter("name");
@@ -46,8 +45,8 @@ public class Qyery extends HttpServlet {
         map.put("date",date);
         for (String key : map.keySet()) {
             String val = map.get(key);
-            if (val.equals("")) {
-                count+=1;
+            if (!val.equals("")) {
+                count++;
             }
         }
         System.out.println(identify+name+sex+province+city+susp+diag+date);
@@ -56,36 +55,41 @@ public class Qyery extends HttpServlet {
             cnn = getConnection("jdbc:mysql://localhost:3306/epidemic?serverTimezone=GMT%2B8",
                     "root",
                     "123456");
-            String sql = "SELECT * FROM info WHERE (?,?)";
-            PreparedStatement stmt = cnn.prepareStatement(sql);
-            rs = stmt.executeQuery();
-            if (count == 0){
-
-            }else if (count == 1){
-
-            }else if (count == 2){
-
-            }else if (count == 3){
-
-            }else if (count == 4){
-
-            }else if (count == 5){
-
-            }else if (count == 6){
-
-            }else if (count == 7){
-
-            }else{
-
+            String sql = "SELECT * FROM info";
+            if (count != 0){
+                sql+=" WHERE ";
+            }
+            for (String key : map.keySet()) {
+                String val = map.get(key);
+                if (!val.equals("")&& count!=0) {
+                    sql+=key+"="+"'"+val +"'";
+                    count--;
+                    if (count!=0){
+                        sql+= " AND ";
+                    }
+                }
+            }
+            Statement stmt = cnn.createStatement();
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                UserInfo uu = new UserInfo();
+                uu.setIdentify(rs.getString(1));
+                uu.setName(rs.getString(2));
+                uu.setSex(rs.getString(3));
+                uu.setProvince(rs.getString(4));
+                uu.setCity(rs.getString(5));
+                uu.setSusp(rs.getString(6));
+                uu.setDiag(rs.getString(7));
+                uu.setDate(rs.getString(8));
+                userInfos.add(uu);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
         PrintWriter oo = response.getWriter();
         response.setCharacterEncoding("utf-8");
-        oo.print(new Gson().toJson("查询成功！"));
+        oo.print(new Gson().toJson(userInfos));
         oo.flush();
         oo.close();
     }

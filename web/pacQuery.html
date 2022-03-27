@@ -40,20 +40,9 @@
         $(document).ready(function (){
             $('#picture').click(function (){
                 $.ajax({
-                    type : 'post',
+                    type : 'get',
                     url : '/WebAjax_war_exploded/pacQuery',
-                    data : {
-                        identify: $('#identify').val(),
-                        name: $('#name').val(),
-                        sex: $('#sex').val(),
-                        province: $('#province').val(),
-                        city: $('#city').val(),
-                        susp: $('#susp').val(),
-                        diag: $('#diag').val(),
-                        date: $('#date').val(),
-                        college : $('#college').val()
-                    },
-                    dataType : 'json',
+                    dataType: 'json',
                     success : function (result){
                         alert("查询成功")
                         $("#showDiv").empty();

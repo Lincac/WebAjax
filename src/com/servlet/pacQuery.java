@@ -23,9 +23,41 @@ import static java.sql.DriverManager.getConnection;
 public class pacQuery extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Connection cnn;
+        ResultSet rs;
+        List<UserInfo> userInfos = new ArrayList<UserInfo>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            cnn = getConnection("jdbc:mysql://localhost:3306/epidemic?serverTimezone=GMT%2B8",
+                    "root",
+                    "123456");
+            String sql = "SELECT * FROM info";
+            Statement stmt = cnn.createStatement();
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                UserInfo uu = new UserInfo();
+                uu.setIdentify(rs.getString(1));
+                uu.setName(rs.getString(2));
+                uu.setCollege(rs.getString(3));
+                uu.setSex(rs.getString(4));
+                uu.setProvince(rs.getString(5));
+                uu.setCity(rs.getString(6));
+                uu.setTemp(rs.getString(7));
+                uu.setIs_back(rs.getString(8));
+                uu.setSusp(rs.getString(9));
+                uu.setDiag(rs.getString(10));
+                uu.setDate(rs.getString(11));
+                userInfos.add(uu);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        PrintWriter oo = response.getWriter();
+        response.setCharacterEncoding("utf-8");
+        oo.print(new Gson().toJson(userInfos));
+        oo.flush();
+        oo.close();
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection cnn;

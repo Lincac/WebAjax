@@ -25,6 +25,39 @@
                     success : function (result){
                         alert("查询成功");
                         $("#showDiv").empty();
+                        $("#showDiv").append("<tr><th align=\"center\">学号/工号</th><th align=\"center\">姓名</th><th align=\"center\">性别</th><th align=\"center\">学院</th><th align=\"center\">省份</th><th align=\"center\">城市</th><th align=\"center\">体温</th><th align=\"center\">返校情况</th><th align=\"center\">疑似情况</th><th align=\"center\">确诊情况</th><th align=\"center\">日期</th></tr>");
+                        for(var i=0;i<result.length;i++)
+                        {
+                            $("#showDiv").append("<tr style='text-align: center'><td>"+result[i].identify+"</td><td>"+result[i].name+"</td><td>"+result[i].sex+"</td><td>"+result[i].college+"</td><td>"+result[i].province+"</td><td>"+result[i].city+"</td><td>"+result[i].temp+"</td><td>"+result[i].is_back+"</td><td>"+result[i].susp+"</td><td>"+result[i].diag+"</td><td>"+result[i].date+"</td></tr>");
+                        }
+
+                    },
+                    error :function (e){
+                        alert("查询空错误！")
+                    }
+                });
+            });
+        });
+        $(document).ready(function (){
+            $('#picture').click(function (){
+                $.ajax({
+                    type : 'post',
+                    url : '/WebAjax_war_exploded/Query',
+                    data : {
+                        identify: $('#identify').val(),
+                        name: $('#name').val(),
+                        sex: $('#sex').val(),
+                        province: $('#province').val(),
+                        city: $('#city').val(),
+                        susp: $('#susp').val(),
+                        diag: $('#diag').val(),
+                        date: $('#date').val(),
+                    },
+                    dataType : 'json',
+                    success : function (result){
+                        alert("查询成功");
+                        $("#showDiv").empty();
+                        $("#showDiv").append("<tr><th align=\"center\">学号/工号</th><th align=\"center\">姓名</th><th align=\"center\">性别</th><th align=\"center\">学院</th><th align=\"center\">省份</th><th align=\"center\">城市</th><th align=\"center\">体温</th><th align=\"center\">返校情况</th><th align=\"center\">疑似情况</th><th align=\"center\">确诊情况</th><th align=\"center\">日期</th></tr>");
                         for(var i=0;i<result.length;i++)
                         {
                             $("#showDiv").append("<tr style='text-align: center'><td>"+result[i].identify+"</td><td>"+result[i].name+"</td><td>"+result[i].sex+"</td><td>"+result[i].college+"</td><td>"+result[i].province+"</td><td>"+result[i].city+"</td><td>"+result[i].temp+"</td><td>"+result[i].is_back+"</td><td>"+result[i].susp+"</td><td>"+result[i].diag+"</td><td>"+result[i].date+"</td></tr>");

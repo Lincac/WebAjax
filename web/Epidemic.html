@@ -29,12 +29,18 @@
                     },
                     dataType : "json",/*前后端交互的类型*/
                     success : function (result){
-                     alert(result);
                        if ($("input[type = 'radio']:checked").val() == "学院") {
-                           window.location.href = "pacQuery.html"
-                       } else if ($("input[type = 'radio']:checked").val() == "防控办") {
+                           alert(result);
                            window.location.href = "Query.html"
+                       } else if ($("input[type = 'radio']:checked").val() == "防控办") {
+                           alert(result);
+                           window.location.href = "pacQuery.html"
                        } else if ($("input[type = 'radio']:checked").val() == "学生/教师") {
+                           if (hou >= 10) {
+                               alert("错过打卡时间！");
+                               location.reload();
+                               ajax.abort();
+                           }
                            window.location.href = "Reporting.html"
                        }
 

@@ -37,13 +37,13 @@
                         },
                         dataType : 'json',
                         success : function (result){
-                            alert(result)
+                            alert("上传成功")
                             setTimeout(function (){
                                 window.location.href = "http://localhost:8080/WebAjax_war_exploded/Query.html";
                             },3000);
                         },
                         error :function (e){
-                            alert(e)
+                            alert("上传出错")
                         }
                     });
                 }else {

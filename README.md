@@ -1,2 +1,2 @@
 # WebAjax
-This project is about the simple web profile.
+This project is about the simple web project.
